@@ -4,24 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amigo Secreto</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: azure;
+      display: flex;
+      justify-content: center;
+    }
+    button#adicionar {
+      width: 150px;
+      height: 50px;
+    }
+    button#sortear {
+      width: 100%;
+      height: 50px;
+      margin: 10px 0;
+    }
+    input {
+      width: 300px;
+      height: 50px;
+    }
+    .nome {
+      display: block;
+    }
+    ul {
+      padding-inline-start: 0px;
+      list-style-position: inside;
+    }
+    ul li {
+      padding: 10px;
+      background-color: lightblue;
+      list-style-type: decimal;
+      margin-bottom: 5px;
+    }
+    #mensagens {
+      margin: 100px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Amigo Secreto</h1>
+  <main>
+    <h1>Amigo Secreto</h1>
+  
+    <div id="sorteio" style="display: hidden;">
+  
+      <span id="mensagens"></span>
+  
+      <label for="nome" class="nome">Nome</label>
+      <input id="nome" type="text">
+      <button id="adicionar">Adicionar</button>
+      <button id="sortear" style="display: block;visibility: hidden;">Sortear</button>
+  
+      <ul id="participantes"></ul>
+    </div>
+    <div id="sorteado" style="display: hidden;">
+      <span>Seu amigo secreto é: </span><span id="amigo"></span>
+    </div>
 
-  <div id="sorteio" style="display: none;">
-
-    <span id="mensagens"></span>
-
-    <label for="nome">Nome:</label>
-    <input id="nome" type="text">
-    <button id="adicionar">Adicionar</button>
-    <button id="sortear">Sortear</button>
-
-    <ul id="participantes"></ul>
-  </div>
-  <div id="sorteado" style="display: none;">
-    <span>Seu amigo secreto é: </span><span id="amigo"></span>
-  </div>
+  </main>
 
   <script>
 
@@ -36,6 +79,7 @@
     } else {
       document.querySelector("#sorteado").style.display = "none"
       document.querySelector("#sorteio").style.display = ""
+      // document.getElementById("nome").focus()
     }
 
     let participantes = []
@@ -49,6 +93,10 @@
       let id = `${event.target.id}`.replace("excluir", "")
       document.getElementById(`participante${id}`).remove()
       participantes = participantes.filter(p => p.id != id)
+      if (participantes.length < 3) {
+        document.querySelector("#sortear").style.visibility = "hidden"
+      }
+      document.getElementById("nome").focus()
     }
 
     function adicionarParticipante() {
@@ -82,7 +130,9 @@
       document.querySelector("#nome").value = ""
       if (participantes.length > 2) {
         document.querySelector("#mensagens").textContent = ""
+        document.querySelector("#sortear").style.visibility = ""
       }
+      document.getElementById("nome").focus()
     }
 
     function sortearAmigoSecreto() {
