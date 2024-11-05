@@ -48,7 +48,7 @@
     button#adicionar {
       width: 150px;
       height: 50px;
-      
+
     }
     button#sortear {
       width: 100%;
@@ -114,6 +114,10 @@
     #participantes {
       margin-top: 10px;
     }
+    #participantes div {
+      display: flex;
+      flex-direction: column;
+    }
   </style>
 </head>
 <body>
@@ -161,7 +165,7 @@
     } else {
       document.querySelector("#sorteado").style.display = "none"
       document.querySelector("#sorteio").style.display = ""
-      // document.getElementById("nome").focus()
+      document.getElementById("nome").focus()
     }
 
     let participantes = []
@@ -212,8 +216,7 @@
           <div>
             <span class="nome-participante">${participante.nome}</span>
             <span id="id${participante.id}"></span>
-            <span id="idAmigo${participante.id}"></span>
-            <a id="link${participante.id}" href="" target="_blank"></a>
+            <a id="link${participante.id}" target="_blank"></a>
           </div>
           <button class="botao-excluir" onclick="excluir(event)" id="excluir${participante.id}">Excluir</button>
         </li>
@@ -244,7 +247,7 @@
       }
       
       participantes.forEach(participante => {
-        document.getElementById(`id${participante.id}`).textContent = ` - Amigo sorteado (enviei este link para ${participante.nome}): `
+        document.getElementById(`id${participante.id}`).textContent = `Copiei e compartilhe esse link com ${participante.nome.toUpperCase()}: `
         document.getElementById(`link${participante.id}`).href = window.location.href + "?amigo=" + btoa(participante.amigo)
         document.getElementById(`link${participante.id}`).textContent = document.getElementById(`link${participante.id}`).href
       })
