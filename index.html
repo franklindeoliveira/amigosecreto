@@ -11,11 +11,14 @@
     }
 
     body {
-      background-color: azure;
+      background-color: rgb(235, 235, 235);
+      background: linear-gradient(0deg, rgba(112, 210, 210, 1) 50%, rgba(255,255,255,1) 100%);
+      height: 100vh;
+      color: rgb(74, 74, 74);
+      font-size: 16px;
     }
 
     main {
-      background-color: azure;
       display: flex;
       justify-content: center;
       flex-direction: column;
@@ -37,6 +40,10 @@
       font-size: 56px;
     }
 
+    header p {
+      font-size: 20px;
+    }
+
     #sorteio {
       margin: 10px
     }
@@ -45,12 +52,23 @@
       cursor: pointer;
     }
 
-    button#adicionar {
+    .botao-adicionar, .botao-sortear {
       width: 150px;
       height: 50px;
-
+      background-color: dodgerblue;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
     }
-    button#sortear {
+    
+    .botao-adicionar:hover, .botao-sortear:hover {
+      background-color: rgb(26, 116, 206);
+    }
+    .button-adicionar:active, .botao-sortear:active {
+      background-color: rgb(23, 101, 179);
+    }
+    .botao-sortear {
       width: 100%;
       height: 50px;
       margin: 10px 0;
@@ -58,8 +76,14 @@
     input {
       width: 300px;
       height: 50px;
-      padding: 10px;
+      padding: 5px 10px;
       text-transform: uppercase;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    input:hover, input:focus {
+      border: 2px solid dodgerblue;      
     }
     ul {
       padding-inline-start: 0px;
@@ -67,10 +91,11 @@
     }
     ul li {
       padding: 10px;
-      background-color: lightblue;
+      background-color: rgb(255, 255, 255);
       margin-bottom: 5px;
       display: flex;
       align-items: center;
+      border-radius: 5px;
     }
     ul li div {
       flex-grow: 1;
@@ -95,16 +120,18 @@
     .controles-input input {
       flex-grow: 1;
     }
-
     .botao-excluir {
       border: none;
       background-color: rgb(220, 1, 1);
       color: white;
       border-radius: 5px;
-      padding: 5px;
+      padding: 5px 10px;
     }
     .botao-excluir:hover {
-      background-color: rgb(255, 0, 0);
+      background-color: rgb(182, 1, 1);
+    }
+    .botao-excluir:active {
+      background-color: rgb(152, 0, 0);
     }
     .nome-participante {
       font-weight: bold;
@@ -117,6 +144,10 @@
     #participantes div {
       display: flex;
       flex-direction: column;
+    }
+
+    .nome {
+      font-size: 20px;
     }
   </style>
 </head>
@@ -133,14 +164,14 @@
   
       <div class="form">
         <div class="controles">
-          <label for="nome" class="nome">Nome</label>
+          <label for="nome" class="nome">Nome:</label>
           <div class="controles-input">
             <input id="nome" type="text">
-            <button id="adicionar">Adicionar</button>
+            <button id="adicionar" class="botao-adicionar">Adicionar</button>
           </div>
         </div>
         <div class="sortear">
-          <button id="sortear" style="display: none;">Sortear</button>
+          <button id="sortear" class="botao-sortear" style="display: none;">Sortear</button>
         </div>
       </div>
   
